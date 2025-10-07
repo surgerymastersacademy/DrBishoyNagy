@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السيرة الذاتية - د. بيشوي ناجي | CV - Dr. Bishoy Nagy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body.lang-ar { font-family: 'Cairo', sans-serif; }
+        body.lang-en { font-family: 'Inter', sans-serif; }
+        body {
+            background-color: #f0f4f8;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s forwards ease-out;
+        }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        .lang-btn.active { background-color: #1D4ED8; color: white; }
+        [dir="rtl"] .border-l-4 { border-left-width: 0px; border-right-width: 4px; }
+        [dir="rtl"] .pl-4 { padding-left: 0; padding-right: 1rem; }
+        #scrollTopBtn, .floating-contact a { transition: opacity 0.3s, transform 0.3s; }
+    </style>
+</head>
+<body class="text-gray-800 lang-ar transition-all duration-300">
+
+    <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+
+    <!-- Header Section -->
+    <header id="page-header" class="p-4 sm:p-6 bg-white/90 backdrop-blur-lg border-b fixed top-0 left-0 right-0 z-40 shadow-sm">
+        <div class="container mx-auto max-w-7xl flex items-center justify-between rtl:flex-row-reverse">
+            
+            <!-- Image Section -->
+            <div class="flex-shrink-0">
+                <img src="https://pub-fb0d46cb77cb4e22b5863540fe118da4.r2.dev/DrBishoyImages/professional%20Smile.png" alt="Dr. Bishoy Nagy" class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover object-top shadow-md">
+            </div>
+    
+            <!-- Centered Text -->
+            <div class="flex-grow text-center px-4">
+                <h1 class="text-xl sm:text-2xl font-bold text-gray-900" dir="ltr">Dr. Bishoy Nagy Gerges</h1>
+                <h2 class="text-lg sm:text-xl font-bold text-blue-700" dir="rtl">د. بيشوي ناجي جرجس</h2>
+                <p class="text-sm text-gray-600 mt-1" dir="ltr">Consultant Plastic & Reconstructive Surgeon</p>
+                <p class="text-sm text-gray-600" dir="rtl">استشاري جراحة التجميل والترميم</p>
+            </div>
+    
+            <!-- Buttons Section -->
+            <div class="flex-shrink-0 flex flex-col items-center space-y-2">
+                 <div class="flex space-x-1 rtl:space-x-reverse border border-gray-200 rounded-lg p-1 bg-white">
+                    <button id="btn-ar" class="lang-btn active px-3 py-1 text-sm font-semibold rounded-md transition-colors duration-300">العربية</button>
+                    <button id="btn-en" class="lang-btn px-3 py-1 text-sm font-semibold rounded-md transition-colors duration-300">English</button>
+                </div>
+                <a href="https://pub-fb0d46cb77cb4e22b5863540fe118da4.r2.dev/Dr%20Bishoy%20Nagy%20CV%20Nov%202025.pdf" target="_blank" id="download-btn" class="bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-transform hover:scale-105 duration-300 text-xs sm:text-sm font-semibold shadow-md flex items-center space-x-2 rtl:space-x-reverse">
+                    <i class="fas fa-download"></i>
+                    <span id="download-btn-text"></span>
+                </a>
+            </div>
+    
+        </div>
+    </header>
+
+    <div id="main-container" class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+        <div class="bg-white shadow-2xl rounded-2xl overflow-hidden">
+            <main class="p-6 sm:p-8" id="main-content">
+                <!-- Content will be dynamically inserted here by JavaScript -->
+            </main>
+            
+            <!-- Footer with Social Links -->
+            <footer class="bg-gray-50 border-t p-6 sm:p-8" id="footer-content">
+                <!-- Footer content will be dynamically inserted here -->
+            </footer>
+        </div>
+    </div>
+    
+    <!-- Floating Contact Buttons -->
+    <div class="floating-contact fixed bottom-24 right-8 rtl:right-auto rtl:left-8 space-y-3 z-50">
+        <a href="https://wa.me/201009253841" target="_blank" class="bg-green-500 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition-all duration-300 transform hover:scale-110">
+            <i class="fab fa-whatsapp fa-2x"></i>
+        </a>
+        <a href="mailto:DoctorBishoy@Gmail.com" target="_blank" class="bg-red-500 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-red-600 transition-all duration-300 transform hover:scale-110">
+            <i class="fas fa-envelope fa-lg"></i>
+        </a>
+    </div>
+
+    <button id="scrollTopBtn" class="opacity-0 transform translate-y-4 fixed bottom-8 right-8 rtl:right-auto rtl:left-8 bg-blue-700 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-blue-800 transition-all duration-300 z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const fullContent = {
+            ar: {
+                header: { download: 'تحميل السيرة الذاتية' },
+                footer: {
+                    title: 'تواصل معي',
+                    links: { whatsapp: 'واتساب', email: 'البريد الإلكتروني', academy: 'أكاديمية الجراحة', facebook: 'فيسبوك', youtube: 'يوتيوب', instagram: 'انستغرام', tiktok: 'تيك توك', linkedin: 'لينكد إن' }
+                },
+                sections: [
+                    { type: 'summary', icon: 'fas fa-user-tie', title: 'نبذة تعريفية', text: 'استشاري جراحة تجميل وترميم معتمد من البورد المصري وحاصل على درجة الدكتوراه، مع خبرة عملية واسعة في إجراء العمليات التجميلية والترميمية المتقدمة. قائد سريري متفانٍ، مؤلف أكاديمي، ومبتكر طبي، ملتزم بتطوير التقنيات الجراحية وتقديم رعاية فائقة تتمحور حول المريض. مؤسس منصة "Surgery Masters Academy" التعليمية ومؤلف المرجع العلمي "Plasticology". أسعى لتوظيف خبرتي السريرية ومهاراتي القيادية للمساهمة في مؤسسة طبية رائدة، وتعزيز الخدمات الجراحية، وتحقيق نتائج سريرية متميزة.' },
+                    { 
+                        type: 'expertise', 
+                        icon: 'fas fa-star', 
+                        title: 'الكفاءات الأساسية ونطاق الخبرة الجراحية',
+                        subsections: [
+                            { title: 'جراحات التجميل (الوجه والجسم)', items: [ 'تجديد شباب الوجه: شد الوجه والرقبة والجفون (جراحياً وبالمنظار).', 'تجميل الأنف: تقنيات متقدمة للتجميل والترميم الوظيفي.', 'نحت وتنسيق القوام: شفط الدهون عالي التحديد، شد البطن، الذراعين، والأفخاذ بعد جراحات السمنة.', 'جراحات الثدي: تكبير (حشوات أو دهون ذاتية)، شد، تصغير، وعلاج التثدي.', 'الإجراءات غير الجراحية: حقن البوتكس، الفيلر، والدهون الذاتية.' ] },
+                            { title: 'جراحات الترميم وإعادة البناء', items: [ 'إعادة البناء المتقدم بالشرائح الجراحية: خبرة واسعة في الشرائح الحرة والمتصلة للعيوب المعقدة.', 'إعادة البناء بعد استئصال الأورام: متخصص في إعادة بناء الثدي وترميم عيوب الرأس والرقبة.', 'ترميم الإصابات: إدارة إصابات الوجه والفكين والأطراف السفلية المعقدة.', 'علاج الحروق: الرعاية الحادة، إصلاح التشوهات، وعلاج الندبات المتقدم.', 'إدارة الجروح المعقدة: علاج الجروح المزمنة، قرح الفراش، والقدم السكري.' ] },
+                            { type: 'hand_microsurgery', title: 'جراحات اليد المتقدمة والجراحات الميكروسكوبية', introduction: 'ممارسة شاملة مكرسة لاستعادة وظيفة وشكل اليد، الرسغ، والطرف العلوي، مع خبرة في:', categories: [ { title: 'جراحة الأعصاب الطرفية المتقدمة', items: [ 'استكشاف وإصلاح الأعصاب: إصلاح ميكروسكوبي، ترقيع الأعصاب، وتحريرها.', 'نقل الأعصاب: إجراء عمليات نقل الأعصاب المعقدة لاستعادة وظيفة العضلات.' ] }, { title: 'إعادة بناء الأوتار المعقدة', items: [ 'نقل الأوتار: إجراءات متقدمة لاستعادة وظيفة اليد والرسغ المفقودة.', 'إعادة بناء الأوتار على مراحل، بما في ذلك زراعة قضبان هنتر.' ] }, { title: 'الإجراءات الميكروسكوبية والترميمية', items: [ 'إعادة زراعة: إعادة توصيل ميكروسكوبية للأصابع، الأيدي، والأطراف المبتورة.', 'نقل الأنسجة الحرة: استخدام الشرائح الحرة لتغطية عيوب الأنسجة الرخوة والعظام.' ] } ] },
+                            { title: 'جراحات العيوب الخلقية', items: [ 'الوجه والجمجمة: إصلاح شامل للشفة الأرنبية وشق سقف الحلق.', 'جراحة تجميل الأطفال العامة: تصحيح تشوهات الأذن، التحام الأصابع، والإحليل السفلي.' ] },
+                        ]
+                    },
+                    { type: 'experience', icon: 'fas fa-briefcase', title: 'الخبرة المهنية', timeline: [
+                        { title: 'استشاري ورئيس قسم جراحة التجميل', date: 'مارس 2025 – حتى الآن', places: 'مستشفى التبين المركزي | مستشفى أمان التخصصي | عيادة خاصة | مستشفى دير الأنبا برسوم' },
+                        { title: 'أخصائي جراحة التجميل والترميم', date: 'نوفمبر 2017 – فبراير 2024', places: 'مستشفى البنك الأهلي (ديسمبر 2020 - ديسمبر 2024) | مستشفى المقطم للتأمين الصحي (أغسطس 2021 - فبراير 2022) | مستشفى الجلاء العسكري (مايو 2020 - نوفمبر 2020) | مستشفى النصر للتأمين الصحي (نوفمبر 2017 - أكتوبر 2019)' },
+                        { title: 'أخصائي الجراحة العامة والتجميل', date: 'مارس 2019 – أكتوبر 2024', places: 'مستشفى الميدان، حدائق حلوان | مركز الإنتاج الحربي الطبي التخصصي' },
+                        { title: 'طبيب مقيم جراحة التجميل والترميم', date: 'أكتوبر 2019 – نوفمبر 2020', places: 'مستشفى المقطم للتأمين الصحي' }
+                    ]},
+                    { type: 'grid', items: [
+                        { icon: 'fas fa-graduation-cap', title: 'التعليم والشهادات', list: [ '<strong>دكتوراه في جراحة التجميل والترميم</strong> (سبتمبر 2025)', '<strong>البورد المصري في جراحة التجميل</strong> (ديسمبر 2024)', '<strong>ترخيص ممارسة الليزر</strong> (سبتمبر 2025)', '<strong>عضوية كلية الجراحين الملكية (MRCS Part A)</strong>, المملكة المتحدة (2020)', '<strong>ماجستير في الجراحة العامة</strong>, جامعة عين شمس (2018)', '<strong>بكالوريوس الطب والجراحة</strong>, القصر العيني (2014)' ] },
+                        { icon: 'fas fa-book-open', title: 'المنشورات والمساهمات الأكاديمية', list: [ '<strong>مؤلف كتاب:</strong> <em>Plasticology (Plastic Surgery Companion)</em>, 1st Edition (2025).', '<strong>بحث منشور:</strong> "Assessment Of Endoscopic Guided Midface Lift...", <em>Menoufia Medical Journal</em> (2025).', '<strong>بحث منشور:</strong> "Formal Abdominoplasty...", <em>The Egyptian Journal of Hospital Medicine</em> (2018).' ] },
+                        { icon: 'fas fa-rocket', title: 'المبادرات التعليمية والقيادية', list: [ '<strong>مؤسس ورئيس تنفيذي:</strong> <em>Surgery Masters Academy</em>، منذ 2017.', '<strong>مؤلف ومطور:</strong> <em>Plasticology</em>، الذي يشمل كتاباً ودورة تعليمية متكاملة.', '<strong>منظم وعضو لجنة علمية:</strong> <em>International Cosmetic Congress (ICCE)</em>، منذ 2019.' ] },
+                        { icon: 'fas fa-award', title: 'المساهمات في المؤتمرات والجوائز', list: [ '<strong>Speaker & Scientific Committee:</strong> "Reconstructive FaceLift - The Beauty Byond Trauma", ICCE 2025', '<strong>Organizing Committee:</strong> ICCE 2024', '<strong>International Speaker:</strong> IACMS-25, 2025', '<strong>Speaker:</strong> "What\'s your Expectations with HypoPigmentation", Burn & Wound Conf., 2024', '<strong>Organizer & Speaker:</strong> "We All Did it Once Before (About Tele-Medicine)", ICC 2022', '<strong>Rising Star Award Winner:</strong> "To Post or not to Boost (Plastic Surgery Marketing Dilemma)", ICC 2021' ] },
+                        { icon: 'fas fa-tools', title: 'الدورات التدريبية المتقدمة', list: [ '<strong>Breast Aesthetics Live Surgery Course</strong> (2025)', '<strong>Lymphedema Surgery Workshop</strong> | Icoplast (2025)', '<strong>Advanced Burn Life Support (ABLS) Course</strong> (2024)', '<strong>Mini-Instructional CME Course (Flaps you must know from head to Toe)</strong> (Feb 2024)', '<strong>Head & Neck Aesthetic Anatomy Cadaver Dissection</strong> | Cotofana (2023)', '<strong>Basic Training of Microsurgery Course</strong> (2022)', '<strong>Advanced Trauma Life Support (ATLS)</strong> (2018)' ] }
+                    ]}
+                ]
+            },
+            en: {
+                header: { download: 'Download CV' },
+                 footer: {
+                    title: 'Connect With Me',
+                    links: { whatsapp: 'WhatsApp', email: 'Email', academy: 'Surgery Academy', facebook: 'Facebook', youtube: 'YouTube', instagram: 'Instagram', tiktok: 'TikTok', linkedin: 'LinkedIn' }
+                },
+                sections: [
+                    { type: 'summary', icon: 'fas fa-user-tie', title: 'Profile', text: 'An Egyptian board-certified Consultant Plastic and Reconstructive Surgeon with a Doctorate (MD) Degree and extensive hands-on experience in a comprehensive range of advanced cosmetic and reconstructive procedures. A dedicated clinical leader, academic author, and medical innovator, committed to advancing surgical techniques and delivering superior patient-centered care. Founder of the "Surgery Masters Academy" educational platform and author of the reference textbook "Plasticology." Seeking to leverage clinical expertise and leadership skills to contribute to a leading medical institution, enhance surgical services, and achieve outstanding clinical outcomes.' },
+                    { 
+                        type: 'expertise', 
+                        icon: 'fas fa-star', 
+                        title: 'Core Competencies & Scope of Practice',
+                        subsections: [
+                             { title: 'Aesthetic Surgery (Face & Body)', items: [ 'Facial Rejuvenation: Surgical and Endoscopic Facelift, Neck Lift, Blepharoplasty.', 'Rhinoplasty: Advanced techniques for cosmetic and functional correction.', 'Body Contouring: High-Definition Liposuction, Abdominoplasty, Brachioplasty, and post-bariatric surgery body contouring.', 'Breast Surgery: Augmentation (Implants & Fat Grafting), Mastopexy, Reduction, and Gynecomastia correction.', 'Non-Surgical Aesthetics: Expert application of Botulinum Toxin, Dermal Fillers, and Autologous Fat Injections.' ] },
+                             { title: 'Reconstructive Surgery', items: [ 'Advanced Flap Reconstruction: Extensive experience in both pedicled and free tissue transfer for complex defects.', 'Post-Oncological Reconstruction: Specializing in post-mastectomy breast reconstruction and head & neck defects.', 'Trauma Reconstruction: Management of complex facial, maxillofacial, and lower limb trauma.', 'Burn Management: Acute care, post-burn deformity correction, and advanced scar revision.', 'Complex Wound Management: Treatment of chronic wounds, pressure sores, and diabetic foot ulcers.' ] },
+                             { type: 'hand_microsurgery', title: 'Hand & Advanced Microsurgery', introduction: 'A comprehensive practice dedicated to restoring function and form to the hand, wrist, and upper extremity, with expertise in:', categories: [ { title: 'Advanced Peripheral Nerve Surgery', items: [ 'Nerve Exploration & Repair: Microsurgical repair, grafting, and neurolysis.', 'Nerve Transfers: Performing complex nerve transfers to reinnervate critical muscles.' ] }, { title: 'Complex Tendon Reconstruction', items: [ 'Tendon Transfers: Advanced procedures to restore lost hand and wrist function.', 'Staged Tendon Reconstruction, including placement of Hunter rods.' ] }, { title: 'Microsurgical & Reconstructive Procedures', items: [ 'Replantation: Microsurgical reattachment of amputated digits, hands, and limbs.', 'Free Tissue Transfer: Utilizing free flaps for complex soft tissue and bone defects.' ] } ] },
+                             { title: 'Congenital Anomalies', items: [ 'Craniofacial: Comprehensive repair of Cleft Lip and Palate.', 'General Paediatric Plastic Surgery: Correction of ear deformities, Syndactly, and Hypospadias.' ] },
+                        ]
+                    },
+                    { type: 'experience', icon: 'fas fa-briefcase', title: 'Professional Experience', timeline: [
+                        { title: 'Consultant & Head of Plastic Surgery Dept.', date: 'March 2025 – Present', places: 'El-Tebeen Central Hospital | Amaan Specialised Hospital | Private Practice | Der Anba Barsoum Hospital' },
+                        { title: 'Plastic & Reconstructive Surgery Specialist', date: 'November 2017 – February 2024', places: 'AlBank AlAhly Hospital (Dec 2020 - Dec 2024) | El-Mokattam Health Insurance Hospital (Aug 2021 - Feb 2022) | El-Galaa Military Hospital (May 2020 - Nov 2020) | El-Nasr Health Insurance Hospital (Nov 2017 - Oct 2019)' },
+                        { title: 'General and Plastic Surgery Specialist', date: 'March 2019 – October 2024', places: 'AlMedan Hospital, Hadayek Helwan | Military Production Specialized Medical Centre' },
+                        { title: 'Plastic & Reconstructive Surgery Resident', date: 'October 2019 – November 2020', places: 'El-Mokattam Health Insurance Hospital' }
+                    ]},
+                    { type: 'grid', items: [
+                        { icon: 'fas fa-graduation-cap', title: 'Education & Certifications', list: [ '<strong>MD, Plastic & Reconstructive Surgery</strong> (Sep 2025)', '<strong>Egyptian Board of Plastic Surgery</strong> (Dec 2024)', '<strong>Licensed Laser Practitioner</strong> (Sep 2025)', '<strong>MRCS Part A</strong>, Royal College of Surgeons, UK (2020)', '<strong>M.Sc., General Surgery</strong>, Ain Shams University (2018)', '<strong>MB BCh, Medicine & Surgery</strong>, Kasr Al-Ainy (2014)' ] },
+                        { icon: 'fas fa-book-open', title: 'Publications & Academic Contributions', list: [ '<strong>Book Author:</strong> <em>Plasticology (Plastic Surgery Companion)</em>, 1st Edition (2025).', '<strong>Published Research:</strong> "Assessment Of Endoscopic Guided Midface Lift...", <em>Menoufia Medical Journal</em> (2025).', '<strong>Published Research:</strong> "Formal Abdominoplasty...", <em>The Egyptian Journal of Hospital Medicine</em> (2018).' ] },
+                        { icon: 'fas fa-rocket', title: 'Leadership & Educational Initiatives', list: [ '<strong>Founder & CEO:</strong> <em>Surgery Masters Academy</em>, since 2017.', '<strong>Author & Creator:</strong> <em>Plasticology</em>, a brand encompassing a textbook and an integrated course.', '<strong>Scientific Committee & Organizer:</strong> <em>International Cosmetic Congress (ICCE)</em>, since 2019.' ] },
+                        { icon: 'fas fa-award', title: 'Conference Contributions & Awards', list: [ '<strong>Speaker & Scientific Committee:</strong> "Reconstructive FaceLift", ICCE 2025', '<strong>Organizing Committee:</strong> ICCE 2024', '<strong>International Speaker:</strong> IACMS-25, 2025', '<strong>Speaker:</strong> "What\'s your Expectations with HypoPigmentation", Burn & Wound Conf., 2024', '<strong>Organizer & Speaker:</strong> "We All Did it Once Before", ICC 2022', '<strong>Rising Star Award Winner:</strong> "To Post or not to Boost", ICC 2021' ] },
+                        { icon: 'fas fa-tools', title: 'Selected Advanced Training', list: [ '<strong>Breast Aesthetics Live Surgery Course</strong> (2025)', '<strong>Lymphedema Surgery Workshop</strong> | Icoplast (2025)', '<strong>Advanced Burn Life Support (ABLS) Course</strong> (2024)', '<strong>Mini-Instructional CME Course (Flaps)</strong> (Feb 2024)', '<strong>Head & Neck Aesthetic Anatomy Cadaver Dissection</strong> | Cotofana (2023)', '<strong>Basic Training of Microsurgery Course</strong> (2022)', '<strong>Advanced Trauma Life Support (ATLS)</strong> (2018)' ] }
+                    ]}
+                ]
+            }
+        };
+
+        const btnAr = document.getElementById('btn-ar');
+        const btnEn = document.getElementById('btn-en');
+        const htmlEl = document.documentElement;
+        const bodyEl = document.body;
+        const mainContent = document.getElementById('main-content');
+        const footerContent = document.getElementById('footer-content');
+        const downloadBtnText = document.getElementById('download-btn-text');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        const pageHeader = document.getElementById('page-header');
+        const mainContainer = document.getElementById('main-container');
+
+        function adjustContentPadding() {
+            const headerHeight = pageHeader.offsetHeight;
+            mainContainer.style.paddingTop = `${headerHeight}px`;
+        }
+
+        function createSectionHeader(title, icon) {
+            let alignClass = htmlEl.dir === 'rtl' ? 'border-r-4 pr-4' : 'border-l-4 pl-4';
+            return `<h3 class="text-2xl sm:text-3xl font-bold ${alignClass} border-blue-700 mb-6 text-gray-900 flex items-center"><i class="${icon} text-blue-500 mx-3 text-2xl"></i>${title}</h3>`;
+        }
+        
+        function renderContent(lang) {
+            const data = fullContent[lang];
+            downloadBtnText.textContent = data.header.download;
+            
+            // Main content rendering
+            let mainHTML = '';
+            let animationDelay = 0;
+            data.sections.forEach(section => {
+                animationDelay += 0.1;
+                mainHTML += `<section class="mb-10 section-fade-in" style="animation-delay: ${animationDelay}s;">`;
+                
+                if (section.type === 'summary') {
+                    mainHTML += createSectionHeader(section.title, section.icon);
+                    mainHTML += `<div class="bg-blue-50 border-r-4 border-blue-200 p-6 rounded-lg"><p class="text-gray-700 leading-relaxed">${section.text}</p></div>`;
+                }
+
+                if (section.type === 'expertise') {
+                    mainHTML += createSectionHeader(section.title, section.icon);
+                    mainHTML += `<div class="grid md:grid-cols-2 gap-x-10 gap-y-8">`;
+                    section.subsections.forEach(sub => {
+                        if(sub.type === 'hand_microsurgery'){
+                             mainHTML += `<div class="md:col-span-2 bg-gray-50 p-6 rounded-lg border">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-3">${sub.title}</h4>
+                                <p class="text-gray-600 mb-4">${sub.introduction}</p>
+                                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                ${sub.categories.map(cat => `
+                                    <div>
+                                        <h5 class="font-bold text-gray-700">${cat.title}</h5>
+                                        <ul class="mt-2 space-y-2 list-disc list-inside text-gray-600">
+                                            ${cat.items.map(item => `<li>${item}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                `).join('')}
+                                </div>
+                            </div>`;
+                        } else {
+                            mainHTML += `
+                                <div>
+                                    <h4 class="text-xl font-semibold text-gray-800 mb-3">${sub.title}</h4>
+                                    <ul class="space-y-2 list-disc list-inside text-gray-700">
+                                        ${sub.items.map(item => `<li>${item}</li>`).join('')}
+                                    </ul>
+                                </div>`;
+                        }
+                    });
+                    mainHTML += `</div>`;
+                }
+
+                if (section.type === 'experience') {
+                    let borderClass = htmlEl.dir === 'rtl' ? 'border-r-2 mr-4' : 'border-l-2 ml-4';
+                    let positionClass = htmlEl.dir === 'rtl' ? '-right-2.5' : '-left-2.5';
+                    let paddingClass = htmlEl.dir === 'rtl' ? 'pr-10' : 'pl-10';
+                    mainHTML += createSectionHeader(section.title, section.icon);
+                    mainHTML += `<div class="space-y-8 relative ${borderClass} border-gray-200">`;
+                     section.timeline.forEach(job => {
+                        mainHTML += `
+                            <div class="${paddingClass} relative">
+                                <div class="absolute w-5 h-5 bg-blue-700 rounded-full ${positionClass} mt-1.5 ring-8 ring-white"></div>
+                                <h4 class="text-xl font-semibold text-gray-800">${job.title}</h4>
+                                <p class="text-blue-600 font-medium text-sm mb-2">${job.date}</p>
+                                <p class="italic text-gray-600">${job.places}</p>
+                            </div>
+                        `;
+                    });
+                    mainHTML += `</div>`;
+                }
+
+                if (section.type === 'grid') {
+                    mainHTML += `<div class="grid lg:grid-cols-2 gap-x-12 gap-y-10">`;
+                    section.items.forEach(item => {
+                        animationDelay += 0.1;
+                        mainHTML += `
+                            <div class="section-fade-in bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300" style="animation-delay: ${animationDelay}s;">
+                                <h4 class="text-xl font-bold border-blue-700 mb-4 text-gray-900 flex items-center"><i class="${item.icon} text-blue-500 mr-3 text-xl rtl:mr-0 rtl:ml-3"></i>${item.title}</h4>
+                                <ul class="space-y-3 text-gray-700 list-disc list-inside">
+                                     ${item.list.map(li => `<li>${li}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    });
+                     mainHTML += `</div>`;
+                }
+
+                mainHTML += `</section>`;
+            });
+            mainContent.innerHTML = mainHTML;
+
+            // Footer content rendering
+            let footerHTML = `
+                <div class="text-center section-fade-in" style="animation-delay: ${animationDelay + 0.1}s;">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900">${data.footer.title}</h3>
+                    <div class="flex flex-col items-center gap-y-4">
+                        <!-- Row 1 -->
+                        <div class="flex justify-center items-center flex-wrap gap-x-6 gap-y-4">
+                            <a href="https://wa.me/201009253841" target="_blank" class="flex items-center space-x-2 rtl:space-x-reverse text-gray-600 hover:text-green-500 transition-colors"><i class="fab fa-whatsapp fa-lg"></i><span class="font-semibold text-sm">${data.footer.links.whatsapp}</span></a>
+                            <a href="mailto:DoctorBishoy@Gmail.com" target="_blank" class="flex items-center space-x-2 rtl:space-x-reverse text-gray-600 hover:text-red-500 transition-colors"><i class="fas fa-envelope fa-lg"></i><span class="font-semibold text-sm">${data.footer.links.email}</span></a>
+                            <a href="https://www.linkedin.com/in/bishoy-nagy-el-maleeh-bb3471165/" target="_blank" class="flex items-center space-x-2 rtl:space-x-reverse text-gray-600 hover:text-blue-600 transition-colors"><i class="fab fa-linkedin fa-lg"></i><span class="font-semibold text-sm">${data.footer.links.linkedin}</span></a>
+                            <a href="https://www.SurgeryMastersAcademy.com" target="_blank" class="flex items-center space-x-2 rtl:space-x-reverse text-gray-600 hover:text-blue-700 transition-colors"><i class="fas fa-globe fa-lg"></i><span class="font-semibold text-sm">${data.footer.links.academy}</span></a>
+                        </div>
+                        <!-- Row 2 -->
+                        <div class="flex justify-center items-center flex-wrap gap-x-6 gap-y-4">
+                            <a href="https://www.facebook.com/DrBishoyNagy/" target="_blank" class="flex items-center space-x-2 rtl:space-x-reverse text-gray-600 hover:text-blue-800 transition-colors"><i class="fab fa-facebook fa-lg"></i><span class="font-semibold text-sm">${data.footer.links.facebook}</span></a>
+                            <a href="https://www.youtube.com/@DrBishoyNagy" target="_blank" class="flex items-center space-x-2 rtl:space-x-reverse text-gray-600 hover:text-red-600 transition-colors"><i class="fab fa-youtube fa-lg"></i><span class="font-semibold text-sm">${data.footer.links.youtube}</span></a>
+                            <a href="https://www.instagram.com/drbishoynagy/" target="_blank" class="flex items-center space-x-2 rtl:space-x-reverse text-gray-600 hover:text-pink-500 transition-colors"><i class="fab fa-instagram fa-lg"></i><span class="font-semibold text-sm">${data.footer.links.instagram}</span></a>
+                            <a href="https://www.tiktok.com/@doctorbishoy" target="_blank" class="flex items-center space-x-2 rtl:space-x-reverse text-gray-600 hover:text-black transition-colors"><i class="fab fa-tiktok fa-lg"></i><span class="font-semibold text-sm">${data.footer.links.tiktok}</span></a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            footerContent.innerHTML = footerHTML;
+        }
+
+        function setLanguage(lang) {
+            if (lang === 'ar') {
+                htmlEl.lang = 'ar'; htmlEl.dir = 'rtl';
+                bodyEl.classList.add('lang-ar'); bodyEl.classList.remove('lang-en');
+                btnAr.classList.add('active'); btnEn.classList.remove('active');
+            } else {
+                htmlEl.lang = 'en'; htmlEl.dir = 'ltr';
+                bodyEl.classList.add('lang-en'); bodyEl.classList.remove('lang-ar');
+                btnEn.classList.add('active'); btnAr.classList.remove('active');
+            }
+            renderContent(lang);
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('opacity-0', 'translate-y-4');
+            } else {
+                scrollTopBtn.classList.add('opacity-0', 'translate-y-4');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }) );
+        btnAr.addEventListener('click', () => setLanguage('ar'));
+        btnEn.addEventListener('click', () => setLanguage('en'));
+
+        // Particle background animation
+        (function() {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let width, height;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = Math.random() * 0.8 - 0.4;
+                    this.vy = Math.random() * 0.8 - 0.4;
+                    this.radius = Math.random() * 1.5 + 1;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                    if (this.y < 0 || this.y > height) this.vy = -this.vy;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                    ctx.fill();
+                }
+            }
+
+            function init() {
+                resize();
+                const particleCount = Math.floor(width * height / 15000);
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function connectParticles() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(0, 0, 0, ${1 - dist / 120})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                connectParticles();
+                requestAnimationFrame(animate);
+            }
+            
+            window.addEventListener('resize', init);
+            
+            init();
+            animate();
+        })();
+
+        window.addEventListener('load', () => {
+            adjustContentPadding();
+            setLanguage('ar');
+        });
+        window.addEventListener('resize', adjustContentPadding);
+    </script>
+</body>
+</html>
+
