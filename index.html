@@ -351,6 +351,71 @@
             margin: 0;
         }
 
+        /* ── Mobile horizontal scroll ── */
+        .scroll-x {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 4px;
+        }
+        .scroll-x::-webkit-scrollbar { display: none; }
+        @media (min-width: 768px) {
+            .scroll-x { flex-wrap: wrap; overflow-x: visible; justify-content: center; }
+        }
+
+        /* ── Testimonial cards ── */
+        .test-card {
+            background: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 20px rgba(15,23,42,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.14);
+        }
+        .test-proc-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--navy-900), var(--navy-700));
+            color: var(--gold-200);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            letter-spacing: 0.02em;
+        }
+        .test-bigquote {
+            font-size: 5rem;
+            line-height: 0.6;
+            color: var(--gold-300);
+            opacity: 0.35;
+            font-family: Georgia, serif;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* ── Form inputs ── */
+        .form-field {
+            width: 100%;
+            border: 2px solid #E5E7EB;
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.25s, box-shadow 0.25s;
+            outline: none;
+            background: white;
+            color: #1F2937;
+        }
+        .form-field:focus {
+            border-color: var(--gold-400);
+            box-shadow: 0 0 0 3px rgba(212,175,55,0.12);
+        }
+
         /* ── Home video category buttons ── */
         .home-vid-btn {
             display: inline-flex;
@@ -571,6 +636,28 @@
                         <a href="#" onclick="showPage('procedures')" class="btn-gold" data-lang-key="hero_cta1">اكتشف خدماتنا</a>
                         <a href="#" onclick="showPage('contact')"    class="btn-outline-gold" data-lang-key="hero_cta2">احجز استشارة</a>
                     </div>
+
+                    <!-- Social icons -->
+                    <div class="flex items-center gap-3 mt-5 justify-center md:justify-start">
+                        <span class="text-white/40 text-xs font-medium" data-lang-key="hero_social_label">تابعنا</span>
+                        <div class="w-px h-4 bg-white/20"></div>
+                        <a href="https://www.facebook.com/DrBishoyNagy/" target="_blank" aria-label="Facebook"
+                           class="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/25 text-white transition-all hover:scale-110">
+                            <i class="fab fa-facebook-f text-xs"></i>
+                        </a>
+                        <a href="https://www.instagram.com/drbishoynagy/" target="_blank" aria-label="Instagram"
+                           class="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/25 text-white transition-all hover:scale-110">
+                            <i class="fab fa-instagram text-xs"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@DrBishoyNagy" target="_blank" aria-label="YouTube"
+                           class="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/25 text-white transition-all hover:scale-110">
+                            <i class="fab fa-youtube text-xs"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@doctorbishoy" target="_blank" aria-label="TikTok"
+                           class="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/25 text-white transition-all hover:scale-110">
+                            <i class="fab fa-tiktok text-xs"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Image -->
@@ -659,12 +746,12 @@
             <h2 class="text-white font-black mb-2" style="font-size:clamp(1.8rem,4vw,2.6rem)" data-lang-key="home_vid_title">+260 فيديو طبي تعليمي</h2>
             <p class="mb-8 max-w-lg mx-auto" style="color:rgba(255,255,255,0.55)" data-lang-key="home_vid_subtitle">اختر الموضوع اللي يهمك وشاهد فيديوهات متخصصة</p>
 
-            <div class="flex flex-wrap justify-center gap-3 mb-10">
-                <button onclick="goToVideoCat('face')"   class="home-vid-btn"><i class="fas fa-user-circle"></i> <span data-lang-key="vcat_face">الوجه والجماليات</span></button>
-                <button onclick="goToVideoCat('body')"   class="home-vid-btn"><i class="fas fa-child"></i> <span data-lang-key="vcat_body">شد البطن والجسم</span></button>
-                <button onclick="goToVideoCat('breast')" class="home-vid-btn"><i class="fas fa-heartbeat"></i> <span data-lang-key="vcat_breast">جراحات الثدي</span></button>
-                <button onclick="goToVideoCat('advice')" class="home-vid-btn"><i class="fas fa-clipboard-check"></i> <span data-lang-key="vcat_advice">قبل وبعد العمليات</span></button>
-                <button onclick="goToVideoCat('edu')"    class="home-vid-btn"><i class="fas fa-graduation-cap"></i> <span data-lang-key="vcat_edu">تعليم طبي</span></button>
+            <div class="scroll-x gap-3 mb-10 px-2">
+                <button onclick="goToVideoCat('face')"   class="home-vid-btn flex-shrink-0"><i class="fas fa-user-circle"></i> <span data-lang-key="vcat_face">الوجه والجماليات</span></button>
+                <button onclick="goToVideoCat('body')"   class="home-vid-btn flex-shrink-0"><i class="fas fa-child"></i> <span data-lang-key="vcat_body">شد البطن والجسم</span></button>
+                <button onclick="goToVideoCat('breast')" class="home-vid-btn flex-shrink-0"><i class="fas fa-heartbeat"></i> <span data-lang-key="vcat_breast">جراحات الثدي</span></button>
+                <button onclick="goToVideoCat('advice')" class="home-vid-btn flex-shrink-0"><i class="fas fa-clipboard-check"></i> <span data-lang-key="vcat_advice">قبل وبعد العمليات</span></button>
+                <button onclick="goToVideoCat('edu')"    class="home-vid-btn flex-shrink-0"><i class="fas fa-graduation-cap"></i> <span data-lang-key="vcat_edu">تعليم طبي</span></button>
             </div>
 
             <a href="https://www.youtube.com/@DrBishoyNagy" target="_blank" rel="noopener"
@@ -801,7 +888,7 @@
             </div>
 
             <!-- ── Category Tabs ── -->
-            <div class="flex flex-wrap justify-center gap-2 mb-8 aos" id="video-tabs">
+            <div class="scroll-x gap-2 mb-8 aos px-2" id="video-tabs">
                 <button class="vid-tab active" data-cat="face">
                     <i class="fas fa-user-circle"></i>
                     <span data-lang-key="vcat_face">الوجه والجماليات</span>
@@ -1086,6 +1173,18 @@
             <div class="gold-bar"></div>
             <p class="mt-4 text-gray-600 max-w-3xl mx-auto" data-lang-key="test_subtitle">قصص حقيقية تعكس مدى التزامنا بتقديم أفضل رعاية وتحقيق نتائج استثنائية.</p>
         </div>
+        <!-- Rating summary -->
+        <div class="flex flex-wrap items-center justify-center gap-6 mb-10 aos">
+            <div class="flex items-center gap-3 bg-white rounded-2xl px-6 py-4 shadow-sm">
+                <span class="text-4xl font-black" style="color:var(--navy-900)">5.0</span>
+                <div>
+                    <div class="flex text-yellow-400 text-lg">★★★★★</div>
+                    <p class="text-xs text-gray-500 mt-0.5 font-medium" data-lang-key="test_rating_label">تقييم المرضى</p>
+                </div>
+            </div>
+            <p class="text-gray-500 text-sm max-w-xs text-center" data-lang-key="test_rating_desc">آراء حقيقية من مرضانا — بدون تعديل أو اختيار</p>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="testimonials-container">
             <div id="testimonials-loader" class="text-center py-12 md:col-span-2 lg:col-span-3"><div class="spinner mx-auto"></div></div>
         </div>
@@ -1106,70 +1205,76 @@
             <p class="mt-4 text-gray-600 max-w-3xl mx-auto" data-lang-key="contact_subtitle">فريقنا جاهز للرد على جميع استفساراتك ومساعدتك في حجز موعدك الأول.</p>
         </div>
 
-        <div class="max-w-4xl mx-auto">
-            <!-- WhatsApp prominent card -->
-            <div class="rounded-2xl p-8 md:p-10 mb-8 text-center aos" style="background:linear-gradient(135deg,#064E3B,#065F46)">
-                <div class="text-6xl mb-4">
-                    <i class="fab fa-whatsapp text-green-300"></i>
+        <div class="max-w-2xl mx-auto">
+
+            <!-- ── WhatsApp Booking Form ── -->
+            <div class="card p-8 md:p-10 mb-6 aos">
+                <div class="text-center mb-7">
+                    <div class="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold mb-3" style="background:#F0FDF4;color:#15803D">
+                        <i class="fab fa-whatsapp"></i>
+                        <span data-lang-key="form_hint">سيُفتح واتساب بالرسالة جاهزة — فقط اضغط إرسال</span>
+                    </div>
+                    <h3 class="text-2xl font-black mb-1" style="color:var(--navy-900)" data-lang-key="form_title">اطلب استشارة</h3>
+                    <p class="text-gray-500 text-sm" data-lang-key="form_subtitle">اكتب بياناتك واختر العملية واضغط الزر</p>
                 </div>
-                <h3 class="text-white font-bold text-2xl mb-2" data-lang-key="contact_whatsapp_title">احجز عبر واتساب</h3>
-                <p class="text-green-100 mb-6" data-lang-key="contact_whatsapp_desc">أسرع طريقة للتواصل والحجز — يرد فريقنا في أقرب وقت</p>
-                <a href="https://wa.me/201022323113" target="_blank" rel="noopener"
-                   class="inline-flex items-center gap-3 bg-green-400 hover:bg-green-300 text-green-900 font-bold rounded-full px-10 py-4 transition text-lg shadow-xl hover:shadow-2xl transform hover:scale-105">
-                    <i class="fab fa-whatsapp text-xl"></i>
-                    <span dir="ltr">+20 102 232 3113</span>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1.5" data-lang-key="form_name_label">اسمك</label>
+                        <input type="text" id="req-name" class="form-field" data-lang-key-ph="form_name_ph" placeholder="اكتب اسمك هنا">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1.5" data-lang-key="form_proc_label">موضوع الاستشارة</label>
+                        <select id="req-proc" class="form-field">
+                            <!-- Populated by JS based on language -->
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1.5">
+                            <span data-lang-key="form_msg_label">رسالتك</span>
+                            <span class="font-normal text-gray-400 text-xs ms-1" data-lang-key="form_optional">(اختياري)</span>
+                        </label>
+                        <textarea id="req-msg" rows="3" class="form-field resize-none" data-lang-key-ph="form_msg_ph" placeholder="أي تفاصيل إضافية..."></textarea>
+                    </div>
+
+                    <button onclick="openWhatsAppRequest()"
+                            class="w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-bold text-lg transition transform hover:scale-[1.02] hover:shadow-2xl shadow-lg mt-2"
+                            style="background:linear-gradient(135deg,#25D366,#128C7E);color:white">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        <span data-lang-key="form_send_btn">أرسل طلبي على واتساب</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Quick contact + Social ── -->
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="rounded-2xl p-5 flex items-center gap-4" style="background:var(--cream);border:1px solid #f0e8cc">
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 text-white" style="background:var(--navy-900)"><i class="fab fa-whatsapp text-lg"></i></div>
+                    <div>
+                        <p class="text-xs text-gray-500 mb-0.5" data-lang-key="contact_whatsapp">للحجز والاستفسار المباشر</p>
+                        <a href="https://wa.me/201022323113" target="_blank" class="font-bold text-gray-800 hover:text-green-600 transition" dir="ltr">+20 102 232 3113</a>
+                    </div>
+                </div>
+                <a href="https://maps.app.goo.gl/Eb1zNiYi9Y8tb5FX8" target="_blank"
+                   class="rounded-2xl p-5 flex items-center gap-4 transition hover:shadow-md" style="background:var(--cream);border:1px solid #f0e8cc">
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 text-white" style="background:var(--navy-700)"><i class="fas fa-map-marker-alt text-lg"></i></div>
+                    <div>
+                        <p class="text-xs text-gray-500 mb-0.5" data-lang-key="contact_location">الموقع</p>
+                        <p class="font-bold text-gray-800" data-lang-key="contact_map_btn">موقعنا على الخريطة</p>
+                    </div>
                 </a>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Booking info -->
-                <div class="card p-8 aos">
-                    <h3 class="font-bold text-xl mb-5" style="color:var(--navy-900)" data-lang-key="contact_info_title"><i class="fas fa-calendar-alt me-2" style="color:var(--gold-400)"></i> معلومات الحجز</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white flex-shrink-0" style="background:var(--navy-900)"><i class="fab fa-whatsapp"></i></div>
-                            <div>
-                                <p class="text-xs text-gray-500 mb-0.5" data-lang-key="contact_whatsapp">للحجز والاستفسار</p>
-                                <a href="https://wa.me/201022323113" class="font-bold text-gray-800 hover:text-green-600 transition" dir="ltr">+20 102 232 3113</a>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white flex-shrink-0" style="background:var(--navy-700)"><i class="fas fa-map-marker-alt"></i></div>
-                            <div>
-                                <p class="text-xs text-gray-500 mb-0.5" data-lang-key="contact_location">الموقع</p>
-                                <a href="https://maps.app.goo.gl/Eb1zNiYi9Y8tb5FX8" target="_blank" class="font-bold text-gray-800 hover:text-blue-600 transition" data-lang-key="contact_map">عرض على الخريطة</a>
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <a href="https://maps.app.goo.gl/Eb1zNiYi9Y8tb5FX8" target="_blank"
-                               class="inline-flex items-center gap-2 border-2 font-bold py-2.5 px-5 rounded-full transition" style="border-color:var(--navy-900);color:var(--navy-900)">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span data-lang-key="contact_map_btn">موقعنا على الخريطة</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Social -->
-                <div class="card p-8 aos" style="transition-delay:0.1s;background:linear-gradient(135deg,var(--navy-900),var(--navy-800))">
-                    <h3 class="font-bold text-xl mb-2 text-white" data-lang-key="contact_social_title"><i class="fas fa-share-alt me-2" style="color:var(--gold-300)"></i> ابقوا على تواصل!</h3>
-                    <p class="text-gray-300 mb-6 text-sm" data-lang-key="contact_social_desc">تابعونا لآخر الأخبار ونصائح تجميلية وقصص نجاح ملهمة</p>
-                    <div class="grid grid-cols-2 gap-3">
-                        <a href="https://www.facebook.com/DrBishoyNagy/" target="_blank" class="flex items-center gap-2 bg-white/10 hover:bg-blue-600 text-white rounded-xl px-4 py-3 transition font-medium text-sm">
-                            <i class="fab fa-facebook-f text-blue-300"></i> Facebook
-                        </a>
-                        <a href="https://www.instagram.com/drbishoynagy/" target="_blank" class="flex items-center gap-2 bg-white/10 hover:bg-pink-600 text-white rounded-xl px-4 py-3 transition font-medium text-sm">
-                            <i class="fab fa-instagram text-pink-300"></i> Instagram
-                        </a>
-                        <a href="https://www.youtube.com/@DrBishoyNagy" target="_blank" class="flex items-center gap-2 bg-white/10 hover:bg-red-600 text-white rounded-xl px-4 py-3 transition font-medium text-sm">
-                            <i class="fab fa-youtube text-red-300"></i> YouTube
-                        </a>
-                        <a href="https://www.tiktok.com/@doctorbishoy" target="_blank" class="flex items-center gap-2 bg-white/10 hover:bg-gray-600 text-white rounded-xl px-4 py-3 transition font-medium text-sm">
-                            <i class="fab fa-tiktok text-gray-200"></i> TikTok
-                        </a>
-                    </div>
-                </div>
+            <!-- Social row -->
+            <div class="mt-5 flex flex-wrap justify-center gap-3">
+                <a href="https://www.facebook.com/DrBishoyNagy/"  target="_blank" class="flex items-center gap-2 bg-gray-100 hover:bg-blue-600 hover:text-white text-gray-700 rounded-full px-5 py-2.5 transition font-semibold text-sm"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="https://www.instagram.com/drbishoynagy/" target="_blank" class="flex items-center gap-2 bg-gray-100 hover:bg-pink-600 hover:text-white text-gray-700 rounded-full px-5 py-2.5 transition font-semibold text-sm"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.youtube.com/@DrBishoyNagy"   target="_blank" class="flex items-center gap-2 bg-gray-100 hover:bg-red-600  hover:text-white text-gray-700 rounded-full px-5 py-2.5 transition font-semibold text-sm"><i class="fab fa-youtube"></i> YouTube</a>
+                <a href="https://www.tiktok.com/@doctorbishoy"    target="_blank" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-800 hover:text-white text-gray-700 rounded-full px-5 py-2.5 transition font-semibold text-sm"><i class="fab fa-tiktok"></i> TikTok</a>
             </div>
+
         </div>
     </div>
 </section>
@@ -1180,63 +1285,90 @@
 <!-- ═══════════════════════════════════════════════════ -->
 <!--                     FOOTER                          -->
 <!-- ═══════════════════════════════════════════════════ -->
-<footer style="background:var(--navy-950); color:#CBD5E1;">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+<!-- Pre-footer CTA band -->
+<div style="background:linear-gradient(135deg,var(--gold-500),var(--gold-300));color:var(--navy-950);" class="py-12">
+    <div class="container mx-auto px-4 text-center">
+        <h3 class="font-black text-2xl md:text-3xl mb-2" data-lang-key="prefooter_title">جاهز لبدء رحلتك؟</h3>
+        <p class="mb-6 opacity-70 font-medium" data-lang-key="prefooter_sub">تواصل معنا الآن واحجز استشارتك الأولى</p>
+        <a href="#" onclick="showPage('contact')"
+           class="inline-flex items-center gap-3 bg-white hover:bg-gray-50 font-bold rounded-full px-8 py-3.5 shadow-xl hover:shadow-2xl transition transform hover:scale-105"
+           style="color:var(--navy-900)">
+            <i class="fab fa-whatsapp text-green-600 text-xl"></i>
+            <span data-lang-key="prefooter_btn">احجز استشارة</span>
+        </a>
+    </div>
+</div>
 
-            <!-- Brand -->
-            <div class="md:col-span-1">
+<footer style="background:var(--navy-950); color:#94A3B8;">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+
+            <!-- Brand + Social -->
+            <div>
                 <img class="h-14 w-auto mb-4"
                      src="https://raw.githubusercontent.com/surgerymastersacademy/DrBishoyNagy/174c205ad5633f173c2944a1fa60d01a866d4377/Images/Dr%20Bishoy%20Logo%202024.png"
-                     alt="شعار العيادة"
+                     alt="شعار د. بيشوي ناجي"
                      onerror="this.src='https://placehold.co/140x56/0F172A/C9A84C?text=Dr.BN'">
-                <p class="text-sm leading-relaxed text-gray-400" data-lang-key="footer_about">عيادة متخصصة في تقديم أرقى خدمات جراحة التجميل والإصلاح، نجمع بين الخبرة العلمية وأحدث التقنيات.</p>
-            </div>
-
-            <!-- Quick links -->
-            <div>
-                <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wide" data-lang-key="footer_links">روابط سريعة</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" onclick="showPage('home')"         class="hover:text-yellow-300 transition" data-lang-key="nav_home">الرئيسية</a></li>
-                    <li><a href="#" onclick="showPage('about')"        class="hover:text-yellow-300 transition" data-lang-key="nav_about">عن الدكتور</a></li>
-                    <li><a href="#" onclick="showPage('procedures')"   class="hover:text-yellow-300 transition" data-lang-key="nav_procedures">شرح العمليات</a></li>
-                    <li><a href="#" onclick="showPage('testimonials')" class="hover:text-yellow-300 transition" data-lang-key="nav_testimonials">آراء المرضى</a></li>
-                    <li><a href="CV/" target="_blank"                  class="hover:text-yellow-300 transition" data-lang-key="nav_cv">السيرة الذاتية</a></li>
-                </ul>
-            </div>
-
-            <!-- Contact -->
-            <div>
-                <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wide" data-lang-key="nav_contact">تواصل معنا</h4>
-                <ul class="space-y-3 text-sm">
-                    <li class="flex items-center gap-2">
-                        <i class="fab fa-whatsapp text-green-400"></i>
-                        <a href="https://wa.me/201022323113" target="_blank" class="hover:text-green-400 transition" dir="ltr">+20 102 232 3113</a>
-                    </li>
-                    <li class="flex items-center gap-2">
-                        <i class="fas fa-map-marker-alt text-yellow-400"></i>
-                        <a href="https://maps.app.goo.gl/Eb1zNiYi9Y8tb5FX8" target="_blank" class="hover:text-yellow-300 transition" data-lang-key="contact_map">عرض على الخريطة</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Social -->
-            <div>
-                <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wide" data-lang-key="footer_social">تابعنا</h4>
-                <div class="flex gap-3 flex-wrap">
-                    <a href="https://www.facebook.com/DrBishoyNagy/"   target="_blank" aria-label="Facebook"  class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-blue-600  text-white transition"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/drbishoynagy/"  target="_blank" aria-label="Instagram" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-pink-600   text-white transition"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/@DrBishoyNagy"    target="_blank" aria-label="YouTube"   class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-red-600    text-white transition"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.tiktok.com/@doctorbishoy"     target="_blank" aria-label="TikTok"    class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-gray-500   text-white transition"><i class="fab fa-tiktok"></i></a>
+                <p class="text-sm leading-relaxed mb-5" data-lang-key="footer_about">استشاري جراحة التجميل والإصلاح — مؤسس Plasticology و Surgery Masters Academy.</p>
+                <div class="flex gap-2.5">
+                    <a href="https://www.facebook.com/DrBishoyNagy/"  target="_blank" aria-label="Facebook"  class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-blue-600  text-white transition text-sm"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/drbishoynagy/" target="_blank" aria-label="Instagram" class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-pink-600   text-white transition text-sm"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@DrBishoyNagy"   target="_blank" aria-label="YouTube"   class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-red-600    text-white transition text-sm"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@doctorbishoy"    target="_blank" aria-label="TikTok"    class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-gray-500   text-white transition text-sm"><i class="fab fa-tiktok"></i></a>
                 </div>
+            </div>
+
+            <!-- Navigation -->
+            <div>
+                <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-widest" data-lang-key="footer_links">روابط سريعة</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#" onclick="showPage('home')"         class="hover:text-yellow-300 transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs opacity-40"></i><span data-lang-key="nav_home">الرئيسية</span></a></li>
+                    <li><a href="#" onclick="showPage('about')"        class="hover:text-yellow-300 transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs opacity-40"></i><span data-lang-key="nav_about">عن الدكتور</span></a></li>
+                    <li><a href="#" onclick="showPage('procedures')"   class="hover:text-yellow-300 transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs opacity-40"></i><span data-lang-key="nav_procedures">شرح العمليات</span></a></li>
+                    <li><a href="#" onclick="showPage('testimonials')" class="hover:text-yellow-300 transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs opacity-40"></i><span data-lang-key="nav_testimonials">آراء المرضى</span></a></li>
+                    <li><a href="#" onclick="showPage('contact')"      class="hover:text-yellow-300 transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs opacity-40"></i><span data-lang-key="nav_contact">تواصل معنا</span></a></li>
+                    <li><a href="CV/" target="_blank"                  class="hover:text-yellow-300 transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs opacity-40"></i><span data-lang-key="nav_cv">السيرة الذاتية</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Contact info -->
+            <div>
+                <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-widest" data-lang-key="nav_contact">تواصل معنا</h4>
+                <ul class="space-y-4 text-sm">
+                    <li>
+                        <a href="https://wa.me/201022323113" target="_blank"
+                           class="flex items-center gap-3 group">
+                            <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 bg-green-500/20 group-hover:bg-green-500 transition"><i class="fab fa-whatsapp text-green-400 group-hover:text-white"></i></div>
+                            <span class="group-hover:text-green-400 transition" dir="ltr">+20 102 232 3113</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://maps.app.goo.gl/Eb1zNiYi9Y8tb5FX8" target="_blank"
+                           class="flex items-center gap-3 group">
+                            <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 bg-yellow-500/20 group-hover:bg-yellow-500 transition"><i class="fas fa-map-marker-alt text-yellow-400 group-hover:text-white"></i></div>
+                            <span class="group-hover:text-yellow-300 transition" data-lang-key="contact_map">عرض على الخريطة</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/@DrBishoyNagy" target="_blank"
+                           class="flex items-center gap-3 group">
+                            <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 bg-red-500/20 group-hover:bg-red-600 transition"><i class="fab fa-youtube text-red-400 group-hover:text-white"></i></div>
+                            <span class="group-hover:text-red-400 transition" data-lang-key="footer_youtube">قناة يوتيوب</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-gray-500">
+        <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-600">
             <p>&copy; <span id="current-year"></span> <span data-lang-key="footer_copyright">جميع الحقوق محفوظة — دكتور بيشوي ناجي</span></p>
-            <div class="flex items-center gap-1">
-                <i class="fas fa-lock text-xs" style="color:var(--gold-400)"></i>
-                <span data-lang-key="footer_privacy">موقع آمن ومحمي</span>
+            <div class="flex items-center gap-3">
+                <span class="flex items-center gap-1">
+                    <i class="fas fa-lock text-xs" style="color:var(--gold-500)"></i>
+                    <span data-lang-key="footer_privacy">موقع آمن ومحمي</span>
+                </span>
+                <span class="opacity-30">|</span>
+                <span data-lang-key="footer_tagline">جراحة تجميل وترميم</span>
             </div>
         </div>
     </div>
@@ -1383,6 +1515,27 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         procedures.forEach(item => {
+            // Normalise the image URL column — sheet header may be ImgURl or ImgUrl
+            const imgUrl     = (item.ImgURl || item.ImgUrl || item.ImgURL || item.imgurl || '').trim();
+            const sciDetail  = (item['تفاصيل علمية'] || '').trim();
+
+            const imgHtml = imgUrl ? `
+                <div class="mb-4 rounded-xl overflow-hidden" style="max-height:240px">
+                    <img src="${imgUrl}" alt="${item.Title}"
+                         class="w-full object-cover" style="max-height:240px"
+                         loading="lazy"
+                         onerror="this.parentElement.style.display='none'">
+                </div>` : '';
+
+            const sciHtml = sciDetail ? `
+                <div class="mt-4 border-t border-gray-100 pt-4">
+                    <button class="sci-toggle w-full flex items-center justify-between text-sm font-bold py-1" style="color:var(--navy-700)">
+                        <span>${t.proc_card_sci} <span class="font-normal text-gray-400 text-xs ms-1">${t.proc_card_sci_note}</span></span>
+                        <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform"></i>
+                    </button>
+                    <div class="sci-body hidden mt-3 text-gray-600 text-sm leading-relaxed">${sciDetail}</div>
+                </div>` : '';
+
             const div = document.createElement('div');
             div.className = 'bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden';
             div.innerHTML = `
@@ -1392,6 +1545,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </button>
                 <div class="accordion-content">
                     <div class="px-5 pb-5 border-t border-gray-50 pt-4">
+                        ${imgHtml}
                         <h4 class="font-bold mb-1 text-sm" style="color:var(--gold-400)">${t.proc_card_who}</h4>
                         <p class="text-gray-600 mb-4 text-sm">${item.ForWhom}</p>
                         <h4 class="font-bold mb-1 text-sm" style="color:var(--gold-400)">${t.proc_card_details}</h4>
@@ -1410,6 +1564,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="text-gray-700">${item.Results}</span>
                             </div>
                         </div>
+                        ${sciHtml}
                     </div>
                 </div>`;
             accordionContainer.appendChild(div);
@@ -1418,17 +1573,33 @@ document.addEventListener('DOMContentLoaded', () => {
         accordionContainer.querySelectorAll('.accordion-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const content = btn.nextElementSibling;
-                const icon    = btn.querySelector('i');
+                const icon    = btn.querySelector('i.fa-chevron-down');
                 const isOpen  = content.style.maxHeight && content.style.maxHeight !== '0px';
 
                 accordionContainer.querySelectorAll('.accordion-content').forEach(c => {
                     c.style.maxHeight = null;
-                    c.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                    c.previousElementSibling.querySelector('i.fa-chevron-down').classList.remove('rotate-180');
                 });
 
                 if (!isOpen) {
                     content.style.maxHeight = content.scrollHeight + 'px';
-                    icon.classList.add('rotate-180');
+                    if (icon) icon.classList.add('rotate-180');
+                }
+            });
+        });
+
+        // Scientific detail toggles
+        accordionContainer.querySelectorAll('.sci-toggle').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const body = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                body.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+                // Re-measure accordion height after toggling
+                const accContent = btn.closest('.accordion-content');
+                if (accContent && accContent.style.maxHeight) {
+                    accContent.style.maxHeight = accContent.scrollHeight + 'px';
                 }
             });
         });
@@ -1519,21 +1690,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const t = slice[i];
             if (!t.Procedure || !t.Quote) continue;
             const card = document.createElement('div');
-            card.className = 'testimonial-card p-7 flex flex-col';
+            card.className = 'test-card p-6';
             card.innerHTML = `
-                <h3 class="font-bold text-lg mb-4 text-center text-gradient">${t.Procedure}</h3>
-                <div class="flex-grow relative text-center mb-4">
-                    <i class="fas fa-quote-right text-6xl absolute -top-4 ltr:right-0 rtl:left-0 opacity-5" style="color:var(--gold-400)"></i>
-                    <p class="text-gray-700 leading-relaxed relative z-10 text-sm">"${t.Quote}"</p>
+                <div class="mb-3">
+                    <span class="test-proc-badge">${t.Procedure}</span>
                 </div>
-                <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+                <div class="flex gap-0.5 mb-3">
+                    ${'★★★★★'.split('').map(() => `<span class="text-yellow-400 text-base">★</span>`).join('')}
+                </div>
+                <div class="flex-grow mb-5">
+                    <span class="test-bigquote">"</span>
+                    <p class="text-gray-600 text-sm leading-relaxed -mt-2">${t.Quote}</p>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto">
                     <div class="flex items-center gap-2">
-                        <span class="text-3xl">${t.CountryFlag || '🌍'}</span>
-                        <span class="font-bold text-gray-800 text-sm">${t.PatientInitials}</span>
+                        <span class="text-2xl">${t.CountryFlag || '🌍'}</span>
+                        <span class="font-bold text-gray-700 text-sm">${t.PatientInitials}</span>
                     </div>
-                    <div class="flex gap-0.5">
-                        ${'★★★★★'.split('').map(() => `<span class="text-yellow-400">★</span>`).join('')}
-                    </div>
+                    <span class="text-xs font-semibold" style="color:var(--gold-500)">
+                        <i class="fas fa-check-circle"></i> مريض موثّق
+                    </span>
                 </div>`;
             testimonialsContainer.appendChild(card);
         }
@@ -1633,7 +1809,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hero_subtitle: "استشاري جراحات التجميل والإصلاح",
             hero_name_1: "الدكتور", hero_name_2: "بيشوي ناجي",
             hero_description: "خبرة واحترافية لإعادة رسم ملامح الجمال والثقة، مع الالتزام بأعلى معايير الأمان والجودة في الجراحات التجميلية والترميمية.",
-            hero_cta1: "اكتشف خدماتنا", hero_cta2: "احجز استشارة",
+            hero_cta1: "اكتشف خدماتنا", hero_cta2: "احجز استشارة", hero_social_label: "تابعنا",
             // Stats
             stat1_label: "سنوات خبرة", stat2_label: "مؤسس Plasticology",
             stat3_label: "فيديو تعليمي", stat4_label: "دكتوراه + عضو ESPRS",
@@ -1699,6 +1875,7 @@ document.addEventListener('DOMContentLoaded', () => {
             proc_error: "عفواً، حدث خطأ أثناء تحميل البيانات.", proc_no_results: "لا توجد نتائج تطابق بحثك.",
             proc_card_who: "لمن هذا الإجراء؟", proc_card_details: "تفاصيل الإجراء",
             proc_card_duration: "مدة العملية", proc_card_recovery: "فترة النقاهة", proc_card_results: "النتائج المتوقعة",
+            proc_card_sci: "تفاصيل علمية", proc_card_sci_note: "(للمختصين)",
             // Testimonials
             test_eyebrow: "قصص حقيقية",
             test_title_1: "شهادات نعتز بها من", test_title_2: "مرضانا",
@@ -1718,6 +1895,19 @@ document.addEventListener('DOMContentLoaded', () => {
             footer_links: "روابط سريعة", footer_social: "تابعنا",
             footer_copyright: "جميع الحقوق محفوظة — دكتور بيشوي ناجي",
             footer_privacy: "موقع آمن ومحمي",
+            // Testimonials
+            test_rating_label: "تقييم المرضى", test_rating_desc: "آراء حقيقية من مرضانا — بدون تعديل أو اختيار",
+            // Contact form
+            form_hint: "سيُفتح واتساب بالرسالة جاهزة — فقط اضغط إرسال",
+            form_title: "اطلب استشارة", form_subtitle: "اكتب بياناتك واختر العملية واضغط الزر",
+            form_name_label: "اسمك", form_proc_label: "موضوع الاستشارة",
+            form_msg_label: "رسالتك", form_optional: "(اختياري)",
+            form_send_btn: "أرسل طلبي على واتساب",
+            // Pre-footer
+            prefooter_title: "جاهز لبدء رحلتك؟", prefooter_sub: "تواصل معنا الآن واحجز استشارتك الأولى",
+            prefooter_btn: "احجز استشارة",
+            // Footer extras
+            footer_youtube: "قناة يوتيوب", footer_tagline: "جراحة تجميل وترميم",
             // Tooltips
             tooltip_whatsapp: "احجز عبر الواتساب", tooltip_location: "عرض الموقع على الخريطة"
         },
@@ -1732,7 +1922,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hero_subtitle: "Consultant Plastic & Reconstructive Surgeon",
             hero_name_1: "Dr.", hero_name_2: "Bishoy Nagy",
             hero_description: "Experience and professionalism to redefine beauty and confidence, committed to the highest standards of safety and quality in cosmetic and reconstructive surgeries.",
-            hero_cta1: "Discover Our Services", hero_cta2: "Book a Consultation",
+            hero_cta1: "Discover Our Services", hero_cta2: "Book a Consultation", hero_social_label: "Follow Us",
             // Stats
             stat1_label: "Years of Experience", stat2_label: "Plasticology Founder",
             stat3_label: "Educational Videos", stat4_label: "PhD + ESPRS Member",
@@ -1798,6 +1988,7 @@ document.addEventListener('DOMContentLoaded', () => {
             proc_error: "Sorry, an error occurred while loading data.", proc_no_results: "No results match your search.",
             proc_card_who: "Who is this for?", proc_card_details: "Procedure Details",
             proc_card_duration: "Duration", proc_card_recovery: "Recovery", proc_card_results: "Expected Results",
+            proc_card_sci: "Scientific Details", proc_card_sci_note: "(for specialists)",
             // Testimonials
             test_eyebrow: "Real Stories",
             test_title_1: "Testimonials We Cherish from", test_title_2: "Our Patients",
@@ -1817,6 +2008,19 @@ document.addEventListener('DOMContentLoaded', () => {
             footer_links: "Quick Links", footer_social: "Follow Us",
             footer_copyright: "All Rights Reserved — Dr. Bishoy Nagy",
             footer_privacy: "Secure & Protected",
+            // Testimonials
+            test_rating_label: "Patient Rating", test_rating_desc: "Real unfiltered reviews from our patients",
+            // Contact form
+            form_hint: "WhatsApp will open with your message ready — just press Send",
+            form_title: "Request a Consultation", form_subtitle: "Fill in your details, choose a topic, and press the button",
+            form_name_label: "Your Name", form_proc_label: "Topic of Consultation",
+            form_msg_label: "Your Message", form_optional: "(optional)",
+            form_send_btn: "Send My Request via WhatsApp",
+            // Pre-footer
+            prefooter_title: "Ready to Start Your Journey?", prefooter_sub: "Contact us now and book your first consultation",
+            prefooter_btn: "Book a Consultation",
+            // Footer extras
+            footer_youtube: "YouTube Channel", footer_tagline: "Plastic & Reconstructive Surgery",
             // Tooltips
             tooltip_whatsapp: "Book via WhatsApp", tooltip_location: "View Location on Map"
         }
@@ -1850,6 +2054,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (allProcedures.length)   applyFiltersAndRender();
         if (allTestimonials.length) { testimonialsContainer.innerHTML = ''; renderTestimonials(); }
         if (document.getElementById('video-grid-main')) renderVideoGrid(activeVideoCat);
+        populateReqForm(lang);
     }
 
     function toggleLang() {
@@ -1859,6 +2064,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     langSwitcher.addEventListener('click', toggleLang);
     if (langSwitcherMobile) langSwitcherMobile.addEventListener('click', toggleLang);
+
+    // ── WhatsApp Booking Form ──
+    const reqProcOptions = {
+        ar: ['استفسار عام', 'تجميل الأنف (Rhinoplasty)', 'شد الوجه (Facelift)', 'جراحة الجفن (Blepharoplasty)', 'تجميل الأذن (Otoplasty)', 'زراعة الشعر', 'شد البطن (Abdominoplasty)', 'شفط الدهون (Liposuction)', 'تكبير الأرداف', 'تكبير الثدي (Breast Aug)', 'رفع الثدي (Mastopexy)', 'تصغير الثدي (Reduction)', 'إعادة بناء الثدي', 'جراحة اليد', 'علاج الحروق والندوب', 'استشارة أخرى'],
+        en: ['General Inquiry', 'Rhinoplasty (Nose Job)', 'Facelift', 'Eyelid Surgery (Blepharoplasty)', 'Otoplasty (Ear)', 'Hair Transplantation', 'Abdominoplasty (Tummy Tuck)', 'Liposuction', 'Buttock Augmentation', 'Breast Augmentation', 'Breast Lift (Mastopexy)', 'Breast Reduction', 'Breast Reconstruction', 'Hand Surgery', 'Burn & Scar Treatment', 'Other Consultation']
+    };
+
+    function populateReqForm(lang) {
+        const sel = document.getElementById('req-proc');
+        if (!sel) return;
+        const opts = reqProcOptions[lang] || reqProcOptions.ar;
+        sel.innerHTML = opts.map((o, i) => `<option value="${o}"${i === 0 ? ' disabled selected' : ''}>${o}</option>`).join('');
+
+        const nameIn = document.getElementById('req-name');
+        const msgIn  = document.getElementById('req-msg');
+        if (nameIn) nameIn.placeholder = lang === 'ar' ? 'اكتب اسمك هنا...' : 'Enter your name...';
+        if (msgIn)  msgIn.placeholder  = lang === 'ar' ? 'أي تفاصيل إضافية...' : 'Any additional details...';
+    }
+
+    window.openWhatsAppRequest = function() {
+        const lang = document.documentElement.lang || 'ar';
+        const name = (document.getElementById('req-name')?.value || '').trim();
+        const proc = document.getElementById('req-proc')?.value || '';
+        const msg  = (document.getElementById('req-msg')?.value  || '').trim();
+
+        let text;
+        if (lang === 'ar') {
+            text = `مرحباً دكتور بيشوي ناجي 👋\n\nاسمي: ${name || '(لم يُذكر)'}\nأريد الاستفسار عن: ${proc || 'استشارة عامة'}${msg ? '\n\n' + msg : ''}\n\nأتمنى تحديد موعد استشارة. شكراً 🙏`;
+        } else {
+            text = `Hello Dr. Bishoy Nagy 👋\n\nMy name: ${name || '(not specified)'}\nI'd like to inquire about: ${proc || 'General consultation'}${msg ? '\n\n' + msg : ''}\n\nI'd like to schedule a consultation. Thank you 🙏`;
+        }
+        window.open('https://wa.me/201022323113?text=' + encodeURIComponent(text), '_blank');
+    };
 
     // ── Navigate to a video category from Home page ──
     window.goToVideoCat = function(cat) {
@@ -1974,6 +2212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Initialization ──
     const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
     setLanguage(savedLang);
+    populateReqForm(savedLang);
     renderVideoGrid('face');
     loadProcedures();
     loadTestimonials();
